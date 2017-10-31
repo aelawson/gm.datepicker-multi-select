@@ -64,7 +64,7 @@ SOFTWARE.
 						if(!newVal)
 							return;
 							
-						var dateVal = Date.parse($filter('gmISODate')(newVal)), //useUTC ? new Date(newVal).setUTCHours(0, 0, 0, 0) : new Date(newVal).setHours(0, 0, 0, 0),
+						var dateVal = new Date($filter('gmISODate')(newVal)), //useUTC ? new Date(newVal).setUTCHours(0, 0, 0, 0) : new Date(newVal).setHours(0, 0, 0, 0),
 							selectedDates = scope.selectedDates;
 
 						if (scope.selectRange) {
@@ -131,10 +131,9 @@ SOFTWARE.
 					}, update);
 					
 					function update() {
-					  console.log('update');
 						angular.forEach(scope.rows, function (row) {
 							angular.forEach(row, function (day) {
-								day.selected = scope.selectedDates.indexOf(Date.parse($filter('gmISODate')(day.date))) > -1;
+								day.selected = scope.selectedDates.indexOf(new Date($filter('gmISODate')(day.date))) > -1;
 							});
 						});
 					}
