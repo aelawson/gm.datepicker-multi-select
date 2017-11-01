@@ -21,8 +21,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+import moment from 'moment';
 
-	angular.module('gm.datepickerMultiSelect', ['ui.bootstrap'])
+angular.module('gm.datepickerMultiSelect', ['ui.bootstrap'])
 	.filter('gmISODate', function() {
 	  return function(date) {
 	    return date.toISOString().split("T")[0];
