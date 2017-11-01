@@ -22,9 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-(function (angular) {
-	'use strict';
-	
 	angular.module('gm.datepickerMultiSelect', ['ui.bootstrap'])
 	.filter('gmISODate', function() {
 	  return function(date) {
@@ -32,7 +29,7 @@ SOFTWARE.
 	  }
 	})
 	.config(['$provide', '$injector', function ($provide, $injector) {
-	  
+
 	  var useUTC = false;
 
 		// extending datepicker (access to attributes and app scope through $parent)
@@ -63,8 +60,8 @@ SOFTWARE.
 						var newVal = scope.$parent.$eval(attrs.ngModel);
 						if(!newVal)
 							return;
-							
-						var dateVal = new Date($filter('gmISODate')(newVal)), //useUTC ? new Date(newVal).setUTCHours(0, 0, 0, 0) : new Date(newVal).setHours(0, 0, 0, 0),
+
+						var dateVal = moment($filter('gmISODate')(newVal)).toDate(),
 							selectedDates = scope.selectedDates;
 
 						if (scope.selectRange) {
@@ -129,7 +126,7 @@ SOFTWARE.
 					scope.$watch(function () {
 						return ctrl.activeDate.getTime();
 					}, update);
-					
+
 					function update() {
 						angular.forEach(scope.rows, function (row) {
 							angular.forEach(row, function (day) {
@@ -148,5 +145,5 @@ SOFTWARE.
 
 		if ($injector.has('uibDaypickerDirective'))
 			$provide.decorator('uibDaypickerDirective', ['$delegate', '$filter', daypickerDelegate]);
-	}]);
-})(window.angular);
+	}
+]);
