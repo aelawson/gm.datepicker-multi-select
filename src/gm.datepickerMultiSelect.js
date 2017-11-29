@@ -26,7 +26,7 @@ import moment from 'moment';
 angular.module('gm.datepickerMultiSelect', ['ui.bootstrap'])
 	.filter('gmISODate', function() {
 	  return function(date) {
-	    return date.toISOString().split("T")[0];
+	    return moment(date).toDate();
 	  }
 	})
 	.config(['$provide', '$injector', function ($provide, $injector) {
@@ -62,7 +62,7 @@ angular.module('gm.datepickerMultiSelect', ['ui.bootstrap'])
 						if(!newVal)
 							return;
 
-						var dateVal = moment($filter('gmISODate')(newVal)).toDate(),
+						var dateVal = $filter('gmISODate')(newVal),
 							selectedDates = scope.selectedDates;
 
 						if (scope.selectRange) {
